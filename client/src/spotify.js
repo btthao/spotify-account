@@ -1,6 +1,6 @@
 const auth_url = "https://accounts.spotify.com/authorize";
 const clientId = "3fc13371e36b4dc0a569cd63066b7490";
-const redirectUri = "http://localhost:4000/";
+const redirectUri = "https://nameless-thicket-51178.herokuapp.com/";
 const scopes = [
     "user-read-currently-playing",
     "user-read-recently-played",
