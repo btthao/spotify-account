@@ -47,7 +47,7 @@ function Nav({ history, logout, headers }) {
           {userData.display_name}
         </h1>
         <button
-          className=" cursor-pointer text-xs rounded-full px-3 lg:py-1 lg:border border-spotify-green xs:hover:bg-spotify-green "
+          className=" cursor-pointer text-xs rounded-full px-3 lg:py-1 lg:border border-spotify-green lg:hover:bg-spotify-green "
           onClick={logout}
         >
           Log Out
