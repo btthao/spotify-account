@@ -10,6 +10,16 @@ module.exports = {
             'lg': '1024px',
             'xl': '1280px',
         },
+        zIndex: {
+            "0": 0,
+            "10": 10,
+            "20": 20,
+            "30": 30,
+            "40": 40,
+            "50": 50,
+            "70": 70,
+            "100": 100,
+        },
         extend: {
             colors: {
                 'spotify-green': '#1BB954',
@@ -22,11 +32,24 @@ module.exports = {
                 's-grey-text': '#919496'
 
             },
+            padding: {
+                'trending-85': '85%',
+                'trending-50': '50%',
+                'trending-90': '90%',
+                'trending-40': '40%',
+                'item-100': '100%',
+            },
             minHeight: {
                 '600': '600px',
             },
             maxHeight: {
                 '1/5': '20%',
+                '120': '120rem',
+            },
+            maxWidth: {
+                'xxxs': '10rem',
+                'xxs': '15rem',
+                '50': '50%',
             },
             fontFamily: {
                 'spotify': ['Montserrat', 'sans-serif'],
@@ -35,6 +58,9 @@ module.exports = {
                 'over': '108%',
                 '85': '85%',
             },
+            gridTemplateColumns: {
+                'track': '1.1fr 1fr 0.2fr'
+            }
 
         },
     },

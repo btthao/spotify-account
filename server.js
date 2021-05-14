@@ -13,8 +13,13 @@ app.listen(port, () => {
     console.log(`starting server at ${port}`);
 });
 
-// app.use(express.static(path.resolve(__dirname, 'client/build')));
 
+app.use(express.static(path.join(__dirname, "client/build")));
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 
 
@@ -25,6 +30,7 @@ const credentials = {
 }
 
 const spotifyApi = new SpotifyWebApi(credentials);
+
 
 //login
 app.post('/login', (req, res) => {
@@ -47,9 +53,7 @@ app.post('/login', (req, res) => {
     } else {
         spotifyApi.setAccessToken(req.body.access_token);
         spotifyApi.setRefreshToken(req.body.refresh_token);
-        res.json({
-            status: 'ok'
-        })
+        res.sendStatus(200)
     }
 })
 
@@ -77,16 +81,11 @@ app.post('/refresh', (req, res) => {
 
 })
 
-//get recently played tracks
-app.get('/recently-played', (req, res) => {
-    spotifyApi
-        .getMyRecentlyPlayedTracks({
-            limit: 6
-        })
+//delete track
+app.post('/delete-track', (req, res) => {
+    spotifyApi.removeTracksFromPlaylistByPosition(req.body.playlist, req.body.track, req.body.snapshotId)
         .then(data => {
-            res.json({
-                list: data.body.items,
-            })
+            res.sendStatus(200)
         })
         .catch(err => {
             console.log(err)
@@ -94,47 +93,16 @@ app.get('/recently-played', (req, res) => {
         })
 })
 
-//get user's information//done
-
-app.get('/getme', (req, res) => {
-    spotifyApi.getMe()
-        .then((data) => {
-            console.log(data.body)
+//add track
+app.post('/add-track', (req, res) => {
+    spotifyApi.addTracksToPlaylist(req.body.playlist, req.body.track)
+        .then(data => {
             res.json({
-                displayName: data.body.display_name,
-                image: data.body.images,
-            })
+                status: 'ok'
+            });
         })
-        .catch(err => { console.log(err) })
+        .catch(err => {
+            console.log(err)
+            res.sendStatus(400)
+        })
 })
-
-//get user's top artists
-
-app.get('/top-artists', (req, res) => {
-    spotifyApi.getMyTopArtists({
-            limit: 8
-        })
-        .then((data) => {
-            res.json({
-                list: data.body.items
-            })
-        })
-        .catch(err => { console.log(err) })
-})
-
-//get top tracks
-app.get('/top-tracks', (req, res) => {
-    spotifyApi.getMyTopTracks({
-            limit: 8
-        })
-        .then((data) => {
-            res.json({
-                list: data.body.items
-            })
-        })
-        .catch(err => { console.log(err) })
-})
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname + 'client/build/index.html'));
-// });

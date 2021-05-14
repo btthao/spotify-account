@@ -4,42 +4,50 @@ import { withRouter } from "react-router-dom";
 import { links } from "../data/nav";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
+import { useUserContext } from "./context";
 
-//done
-function Nav({ history, logout }) {
-  const [pathname, setPathname] = useState("/");
+const trimPath = (path) => {
+  return path.lastIndexOf("/") === 0
+    ? path
+    : path.substring(0, path.lastIndexOf("/"));
+};
+
+function Nav({ history, logout, headers }) {
+  const [state, dispatch] = useUserContext();
+  const [pathname, setPathname] = useState(trimPath(window.location.pathname));
   const [userData, setUserData] = useState({});
   useEffect(() => {
     history.listen((location) => {
-      setPathname(location.pathname);
+      setPathname(trimPath(location.pathname));
     });
   }, [history]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/getme")
+      .get("https://api.spotify.com/v1/me", { headers })
       .then((res) => {
         setUserData(res.data);
+        dispatch({ type: "SET_USER", payload: res.data.id });
       })
       .catch((err) => {
-        window.location = "/";
         console.log(err);
       });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [headers]);
 
   return (
-    <div className=" fixed flex bottom-0 left-0 w-full z-50 bg-black bg-opacity-90 lg:top-0 lg:bg-opacity-50 lg:w-52 lg:h-screen lg:flex-col">
-      <div className="fixed right-1 top-3 flex border border-s-grey rounded-full bg-s-grey lg:relative lg:w-full lg:grid lg:place-items-center lg:px-1 lg:py-10 lg:gap-3 lg:border-0 lg:top-0 lg:right-0 lg:rounded-none lg:bg-transparent break-word text-center ">
+    <div className=" fixed flex bottom-0 left-0 w-full z-70 bg-black bg-opacity-90 lg:top-0 lg:bg-opacity-50 lg:w-52 lg:h-screen lg:flex-col overflow-hidden">
+      <div className="fixed right-1 top-3 flex border border-s-grey rounded-full bg-s-grey lg:relative lg:w-full lg:grid lg:place-items-center lg:px-1 lg:py-10 lg:gap-3 lg:border-0 lg:top-0 lg:right-0 lg:rounded-none lg:bg-transparent  text-center ">
         <Avatar
-          alt={userData.displayName}
-          src={`${userData.image?.length > 0 ? userData.image[0].url : ""}`}
+          alt={userData.display_name}
+          src={`${userData.images?.length > 0 ? userData.images[0].url : ""}`}
           className="user-avatar"
         />
-        <h1 className="hidden lg:block font-semibold text-lg  ">
-          {userData.displayName}
+        <h1 className="hidden overflow-hidden lg:block font-semibold text-lg  ">
+          {userData.display_name}
         </h1>
         <button
-          className=" cursor-pointer text-xs rounded-full px-3 lg:py-1  lg:border"
+          className=" cursor-pointer text-xs rounded-full px-3 lg:py-1 lg:border border-spotify-green xs:hover:bg-spotify-green "
           onClick={logout}
         >
           Log Out
@@ -57,12 +65,14 @@ function Nav({ history, logout }) {
                   ${pathname === item.url ? "opacity-100" : "opacity-0"}`}
               ></div>
               <div
-                className={`flex-1 flex flex-col  items-center justify-center lg:justify-start lg:flex-row group-hover:text-white ${
-                  pathname === item.url ? "text-white" : "text-s-grey-text"
+                className={`flex-1 flex flex-col  items-center justify-center lg:justify-start lg:flex-row group-hover:text-white group-hover:font-bold ${
+                  pathname === item.url
+                    ? "text-white font-bold"
+                    : "text-gray-500 font-semibold"
                 }`}
               >
                 <div className="lg:mx-3">{item.icon}</div>
-                <h6 className="text-xs sm:text-sm  font-semibold lg:text-base">
+                <h6 className="text-xs sm:text-sm   lg:text-base">
                   {item.name}
                 </h6>
               </div>

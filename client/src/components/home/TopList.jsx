@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Item from "../Item";
 
-//done
 function TopList({ name, items }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (items) {
-      setLoading(false);
-    }
-  }, [items]);
-
-  if (loading) return null;
   return (
-    <div className="grid w-full place-items-center p-5 md:py-12 md:px-8 ">
-      <h1 className="mb-10 text-xl xs:text-3xl lg:text-4xl text-center font-bold">
+    <div className="grid w-full place-items-center mt-6 py-6  lg:px-8  ">
+      <h1 className="mb-6 px-2 text-xl xs:text-3xl lg:text-4xl text-center font-bold">
         {name}
       </h1>
-      <div className="grid w-full gap-5 grid-cols-2 md:grid-cols-4 ">
+      <div className="grid w-full gap-5 grid-cols-2 xs:p-5  md:grid-cols-4 max-w-7xl ">
         {items.map((item) => (
           <Item
             key={item.id}

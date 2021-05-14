@@ -17,42 +17,27 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-}
-
-.user-avatar {
-    width: 2rem !important;
-    height: 2rem !important;
-    background-color: black !important;
-}
-
-.trend-item {
-    padding-bottom: 90% !important;
-}
-
-.trending-square {
-    padding-bottom: 85% !important;
-}
-
-@media screen and (min-width: 768px) {
-    .trend-item {
-        padding-bottom: 40% !important;
+    .play-icon {
+        font-size: 2rem !important;
     }
-    .trending-square {
-        padding-bottom: 50% !important;
+    .time-icon {
+        font-size: 1.2rem !important;
     }
-}
-
-.grid-square {
-    padding-bottom: 100% !important;
-}
-
-.play-icon {
-    font-size: 2rem !important;
-}
-
-@media screen and (min-width: 1024px) {
+    .add-icon {
+        font-size: 1rem !important;
+    }
+    .delete-icon {
+        font-size: 0.9rem !important;
+    }
     .user-avatar {
-        width: 4rem !important;
-        height: 4rem !important;
+        width: 2rem !important;
+        height: 2rem !important;
+        background-color: black !important;
+    }
+    @media screen and (min-width: 1024px) {
+        .user-avatar {
+            width: 4rem !important;
+            height: 4rem !important;
+        }
     }
 }

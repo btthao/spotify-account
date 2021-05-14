@@ -1,45 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import Image from "./Image";
 
 function Item({ img, name, link, trackName }) {
-  // const containerRef = useRef(null);
-  // const contentRef = useRef(null);
-  // const [overflow, setOverflow] = useState(false);
-
-  // const adjustText = () => {
-  //   const contentHeight = contentRef.current.getBoundingClientRect().height;
-  //   const containerHeight = containerRef.current.getBoundingClientRect().height;
-  //   if (window.innerWidth >= 768) {
-  //     if (contentHeight > 0.85 * containerHeight) {
-  //       setOverflow(true);
-  //     } else {
-  //       setOverflow(false);
-  //     }
-  //   } else {
-  //     setOverflow(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", adjustText);
-  //   adjustText();
-  //   return () => {
-  //     window.removeEventListener("resize", adjustText);
-  //   };
-  // }, []);
-
   return (
-    <div className="w-full h-full group relative">
+    <div className="w-full group relative">
       {/* img */}
-      <div className="w-full grid-square relative overflow-hidden bg-gray-900 shadow-2xl ">
-        <img
-          src={img}
-          alt={trackName || name}
-          className="  w-full h-full absolute top-0 left-0 object-contain "
-        />
-      </div>
+      <Image img={img} name={trackName || name} />
       {/* info */}
-      <div className="w-full h-fullw-full flex flex-col items-center justify-center text-center md:absolute top-0 left-0  md:h-full md:opacity-0 md:bg-black md:bg-opacity-80 md:group-hover:opacity-100 md:transition md:duration-100 overflow-hidden ">
+      <div className="w-full flex flex-col items-center justify-center text-center md:absolute top-0 left-0  md:h-full md:opacity-0 md:bg-black md:bg-opacity-80 md:group-hover:opacity-100 md:transition md:duration-100 overflow-hidden ">
         <a
           href={link}
           target="_blank"
@@ -48,21 +17,20 @@ function Item({ img, name, link, trackName }) {
         >
           <PlayCircleOutlineIcon className="play-icon" />
         </a>
+        {/* trackname */}
         {trackName && (
-          <p className="truncate  max-w-full px-2 mt-1 font-semibold text-xs xs:text-sm xl:text-base">
-            {/* {trackName.length > 30
-                ? trackName.substring(0, 30) + " ..."
-                : trackName} */}
+          <p className="truncate max-w-full px-2 mt-1 font-semibold text-xs xs:text-sm xl:text-base">
             {trackName}
           </p>
         )}
-        <h3
-          className={`  px-2 mt-0.5 font-medium text-xs xs:text-sm xl:text-base ${
-            trackName ? "text-s-grey-text" : "text-white"
+        {/* artist name */}
+        <p
+          className={`px-2 mt-0.5 font-medium text-xs xs:text-sm xl:text-base  ${
+            trackName ? "text-gray-400" : "text-white"
           } `}
         >
-          {name.length > 30 ? name.substring(0, 30) + " ..." : name}
-        </h3>
+          {name.length > 40 ? name.substring(0, 40) + " ..." : name}
+        </p>
         <a
           href={link}
           target="_blank"
