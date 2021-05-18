@@ -37,7 +37,7 @@ function useToken() {
       //user has logged in before
 
       const timepassed = (Date.now() - currentCode.timestamp) / 1000;
-      console.log(timepassed);
+
       if (timepassed < 3500) {
         // if access code hasn't expired (less than an hour)
         console.log("relogin before one hour");
@@ -87,6 +87,14 @@ function useToken() {
         setLoading(false);
       }
     }
+
+    return () => {
+      setAccessToken("");
+      setRefreshToken("");
+      setExpiresIn("");
+      setLoading(true);
+      setCode("");
+    };
   }, []);
 
   useEffect(() => {

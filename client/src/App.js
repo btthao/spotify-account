@@ -5,7 +5,7 @@ import useToken from "./components/useToken";
 import { useUserContext } from "./components/context";
 
 function App() {
-  const [{ userId }, dispatch] = useUserContext();
+  const [state, dispatch] = useUserContext();
   const [token, setToken] = useState("");
   const [headers, setHeaders] = useState({});
   const { accessToken, loading } = useToken();

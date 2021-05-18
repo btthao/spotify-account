@@ -18,6 +18,7 @@ function Recent({ headers }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
   }, [headers]);
 

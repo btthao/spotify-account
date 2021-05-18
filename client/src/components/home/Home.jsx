@@ -24,6 +24,7 @@ function Home({ headers }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
 
     axios
@@ -37,6 +38,7 @@ function Home({ headers }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
   }, [headers]);
 
