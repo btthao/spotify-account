@@ -1,7 +1,7 @@
 const auth_url = "https://accounts.spotify.com/authorize";
 const clientId = "3fc13371e36b4dc0a569cd63066b7490";
-const redirectUri = "https://personal-spotify.herokuapp.com/";
-// const redirectUri = "http://localhost:3000/";
+//const redirectUri = "https://personal-spotify.herokuapp.com/";
+const redirectUri = "http://localhost:3000/";
 const scopes = [
     "user-read-recently-played",
     "user-top-read",

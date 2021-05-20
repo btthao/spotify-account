@@ -128,6 +128,7 @@ function useToken() {
     const interval = setInterval(() => {
       console.log("refresh while on the app");
       if (refreshToken && expiresIn) {
+        console.log("refresh");
         axios
           .post("/refresh")
           .then((res) => {
@@ -147,7 +148,7 @@ function useToken() {
             window.location = "/";
           });
       }
-    }, (expiresIn - 300) * 1000);
+    }, (expiresIn - 3590) * 1000);
 
     if (!refreshToken) {
       clearInterval(interval);

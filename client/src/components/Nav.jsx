@@ -37,7 +37,7 @@ function Nav({ history, logout, headers }) {
 
   return (
     <div className=" fixed flex bottom-0 left-0 w-full z-70 bg-black bg-opacity-90 lg:top-0 lg:bg-opacity-50 lg:w-52 lg:h-screen lg:flex-col overflow-hidden">
-      <div className="fixed right-1 top-3 flex border border-s-grey rounded-full bg-s-grey lg:relative lg:w-full lg:grid lg:place-items-center lg:px-1 lg:py-10 lg:gap-3 lg:border-0 lg:top-0 lg:right-0 lg:rounded-none lg:bg-transparent  text-center ">
+      <div className="hidden lg:relative lg:w-full lg:grid lg:place-items-center lg:px-1 lg:py-10 lg:gap-3 lg:border-0 lg:top-0 lg:right-0 lg:rounded-none lg:bg-transparent  text-center ">
         <Avatar
           alt={userData.display_name}
           src={`${userData.images?.length > 0 ? userData.images[0].url : ""}`}
@@ -79,6 +79,29 @@ function Nav({ history, logout, headers }) {
             </Link>
           </li>
         ))}
+        <li
+          className=" w-full group flex border-gray-700 h-16 lg:hidden cursor-pointer"
+          onClick={logout}
+        >
+          <div
+            className={`hidden lg:block lg:w-1.5 lg:h-full bg-spotify-green  group-hover:opacity-100 
+                  `}
+          ></div>
+          <div
+            className={`flex-1 flex flex-col  items-center justify-center lg:justify-start lg:flex-row group-hover:text-white group-hover:font-bold text-gray-500 font-semibold `}
+          >
+            <div className="lg:mx-3">
+              <Avatar
+                alt={userData.display_name}
+                src={`${
+                  userData.images?.length > 0 ? userData.images[0].url : ""
+                }`}
+                className="user-avatar"
+              />
+            </div>
+            <h6 className="text-xs sm:text-sm   lg:text-base">Log out</h6>
+          </div>
+        </li>
       </ul>
     </div>
   );
