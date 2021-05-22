@@ -148,7 +148,7 @@ function useToken() {
             window.location = "/";
           });
       }
-    }, (expiresIn / 3) * 1000);
+    }, (expiresIn - 600) * 1000);
 
     if (!refreshToken) {
       clearInterval(interval);
