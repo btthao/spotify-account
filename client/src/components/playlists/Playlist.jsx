@@ -63,6 +63,7 @@ function Playlist({ headers }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
   };
 

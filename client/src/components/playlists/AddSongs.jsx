@@ -33,6 +33,7 @@ function AddSongs({ onClick, headers, playlist, name }) {
         })
         .catch((err) => {
           console.log(err);
+          window.location.reload();
         });
     }
 
@@ -53,6 +54,7 @@ function AddSongs({ onClick, headers, playlist, name }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
   };
 

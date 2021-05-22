@@ -31,6 +31,7 @@ function Nav({ history, logout, headers }) {
       })
       .catch((err) => {
         console.log(err);
+        window.location.reload();
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headers]);
