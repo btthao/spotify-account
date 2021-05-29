@@ -124,6 +124,17 @@ function useToken() {
   }, [code]);
 
   useEffect(() => {
+    let count = 1;
+
+    const preventIdling = setInterval(() => {
+      count = count + 1;
+      console.log("count");
+    }, 1200 * 1000);
+
+    return () => clearInterval(preventIdling);
+  }, []);
+
+  useEffect(() => {
     //refresh while using the app (before 1 hour)
     const interval = setInterval(() => {
       console.log("refresh while on the app");
