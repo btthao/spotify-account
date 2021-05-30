@@ -44,7 +44,11 @@ function Nav({ history, logout, headers }) {
           src={`${userData.images?.length > 0 ? userData.images[0].url : ""}`}
           className="user-avatar"
         />
-        <h1 className="hidden overflow-hidden lg:block font-semibold text-lg  ">
+        <h1
+          className={`hidden overflow-hidden lg:block font-semibold text-lg ${
+            userData.display_name.indexOf(" ") >= 0 ? "" : "truncate max-w-full"
+          }`}
+        >
           {userData.display_name}
         </h1>
         <button
