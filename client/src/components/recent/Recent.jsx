@@ -20,7 +20,6 @@ function Recent({ headers }) {
         console.log(err);
         window.location.reload();
       });
-    console.log(headers);
   }, [headers]);
 
   return (

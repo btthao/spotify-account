@@ -46,7 +46,7 @@ function Nav({ history, logout, headers }) {
         />
         <h1
           className={`hidden overflow-hidden lg:block font-semibold text-lg ${
-            userData.display_name.indexOf(" ") >= 0 ? "" : "truncate max-w-full"
+            /\s/.test(userData.display_name) ? "" : "truncate max-w-full"
           }`}
         >
           {userData.display_name}

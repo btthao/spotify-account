@@ -26,7 +26,6 @@ function useToken() {
 
     if (Object.keys(currentCode).length === 0) {
       // login for the first time, no access token in local storage
-      console.log("get code for first time");
       const getCode = new URLSearchParams(window.location.search).get("code");
       if (getCode) {
         setCode(getCode);
@@ -40,7 +39,6 @@ function useToken() {
 
       if (timepassed < 3500) {
         // if access code hasn't expired (less than an hour)
-        console.log("relogin before one hour");
         axios
           .post("/login", {
             access_token: currentCode.accessToken,
@@ -58,7 +56,6 @@ function useToken() {
           });
       } else if (timepassed < 1000000) {
         // if access code has expired but can still use refresh token so no need to log in again (roughly 10 days)
-        console.log("relogin before 10 days");
         axios
           .post("/refresh", {
             refresh_token: currentCode.refreshToken,
@@ -82,7 +79,6 @@ function useToken() {
           });
       } else {
         // cant use token stored in local storage, back to login page
-        console.log("login again");
         setAccessToken("");
         setLoading(false);
       }
@@ -100,7 +96,6 @@ function useToken() {
   useEffect(() => {
     // login for the first time
     if (code) {
-      console.log("login first time");
       axios
         .post("/login", {
           code,
@@ -124,22 +119,9 @@ function useToken() {
   }, [code]);
 
   useEffect(() => {
-    let count = 1;
-
-    const preventIdling = setInterval(() => {
-      count = count + 1;
-      console.log("count");
-    }, 1200 * 1000);
-
-    return () => clearInterval(preventIdling);
-  }, []);
-
-  useEffect(() => {
     //refresh while using the app (before 1 hour)
     const interval = setInterval(() => {
-      console.log("refresh while on the app");
       if (refreshToken && expiresIn) {
-        console.log("refresh");
         axios
           .post("/refresh")
           .then((res) => {

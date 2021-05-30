@@ -97,9 +97,7 @@ app.post('/delete-track', (req, res) => {
 app.post('/add-track', (req, res) => {
     spotifyApi.addTracksToPlaylist(req.body.playlist, req.body.track)
         .then(data => {
-            res.json({
-                status: 'ok'
-            });
+            res.sendStatus(200)
         })
         .catch(err => {
             console.log(err)
