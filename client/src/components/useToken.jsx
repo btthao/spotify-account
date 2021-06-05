@@ -52,7 +52,7 @@ function useToken() {
           })
           .catch((err) => {
             console.log(err);
-            window.location = "/";
+            window.location.reload();
           });
       } else if (timepassed < 1000000) {
         // if access code has expired but can still use refresh token so no need to log in again (roughly 10 days)
@@ -75,7 +75,7 @@ function useToken() {
           })
           .catch((err) => {
             console.log(err);
-            window.location = "/";
+            window.location.reload();
           });
       } else {
         // cant use token stored in local storage, back to login page
@@ -113,7 +113,7 @@ function useToken() {
         })
         .catch((err) => {
           console.log(err);
-          window.location = "/";
+          window.location.reload();
         });
     }
   }, [code]);
@@ -138,7 +138,7 @@ function useToken() {
           })
           .catch((err) => {
             console.log(err);
-            window.location = "/";
+            window.location.reload();
           });
       }
     }, (expiresIn - 600) * 1000);
