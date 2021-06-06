@@ -47,7 +47,7 @@ function useToken() {
           .then(() => {
             setAccessToken(currentCode.accessToken);
             setRefreshToken(currentCode.refreshToken);
-            setExpiresIn(3600);
+            setExpiresIn(3600 - timepassed);
             setLoading(false);
           })
           .catch((err) => {
@@ -141,7 +141,7 @@ function useToken() {
             window.location.reload();
           });
       }
-    }, (expiresIn - 600) * 1000);
+    }, (expiresIn - 1000) * 1000);
 
     if (!refreshToken) {
       clearInterval(interval);
