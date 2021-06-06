@@ -35,7 +35,7 @@
         width: 23px !important;
         height: 23px !important;
         font-size: 10px !important;
-        background-color: black !important;
+        background-color: #1BB954 !important;
     }
     @media screen and (min-width: 1024px) {
         .user-avatar {
