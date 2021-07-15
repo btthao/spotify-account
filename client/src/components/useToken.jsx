@@ -54,8 +54,8 @@ function useToken() {
             console.log(err);
             window.location.reload();
           });
-      } else if (timepassed < 60 * 5) {
-        // if access code has expired but can still use refresh token so no need to log in again (roughly 1 year... not sure it will last this long lol)
+      } else if (timepassed < 60 * 60 * 24 * 365) {
+        // if access code has expired but can still use refresh token so no need to log in again ( 1 year)
         axios
           .post("/refresh", {
             refresh_token: currentCode.refreshToken,
@@ -75,6 +75,7 @@ function useToken() {
           })
           .catch((err) => {
             console.log(err);
+            localStorage.clear();
             window.location.reload();
           });
       } else {
