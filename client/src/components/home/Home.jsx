@@ -13,7 +13,7 @@ function Home({ headers }) {
   useEffect(() => {
     axios
       .get(
-        "https://api.spotify.com/v1/me/top/artists?limit=8&time_range=long_term",
+        "https://api.spotify.com/v1/me/top/artists?limit=8&time_range=short_term",
         {
           headers,
         }
@@ -29,7 +29,7 @@ function Home({ headers }) {
 
     axios
       .get(
-        "https://api.spotify.com/v1/me/top/tracks?limit=8&time_range=long_term",
+        "https://api.spotify.com/v1/me/top/tracks?limit=8&time_range=short_term",
         { headers }
       )
       .then((res) => {
