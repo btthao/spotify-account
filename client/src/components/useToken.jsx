@@ -3,7 +3,7 @@ import axios from "axios";
 import { useUserContext } from "./context";
 
 function useToken() {
-  const [{ userId }, dispatch] = useUserContext();
+  const [{ userId }, _] = useUserContext();
   const [code, setCode] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
@@ -38,7 +38,7 @@ function useToken() {
       const timepassed = (Date.now() - currentCode.timestamp) / 1000;
 
       if (timepassed < 1000) {
-        // if access code hasn't expired (less than an hour)
+        // if access code hasn't expired
         axios
           .post("/login", {
             access_token: currentCode.accessToken,
@@ -54,8 +54,8 @@ function useToken() {
             console.log(err);
             window.location.reload();
           });
-      } else if (timepassed < 400000) {
-        // if access code has expired but can still use refresh token so no need to log in again (roughly 5 days)
+      } else if (timepassed < 60 * 60 * 24 * 365) {
+        // if access code has expired but can still use refresh token so no need to log in again (roughly 1 year... not sure it will last this long lol)
         axios
           .post("/refresh", {
             refresh_token: currentCode.refreshToken,
